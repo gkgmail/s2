@@ -26,14 +26,18 @@ RUN --mount=type=cache,target=/root/.cache/go-build \
 
 FROM alpine:latest
 
-RUN apk add --no-cache curl ffmpeg yt-dlp
+RUN apk add --no-cache curl ffmpeg yt-dlp && \
+    mkdir -p /app/data /app/cache /app/downloads
 
 WORKDIR /app
 
 COPY --from=builder /app/saveany-bot .
 COPY entrypoint.sh .
+COPY config.toml ./config.toml
 
 RUN chmod +x /app/saveany-bot && \
     chmod +x /app/entrypoint.sh
+
+EXPOSE 8080
 
 ENTRYPOINT ["/app/entrypoint.sh"]

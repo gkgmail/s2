@@ -1,97 +1,37 @@
-<div align="center">
+## Koyeb Deployment
 
-# <img src="docs/static/logo.png" width="45" align="center"> Save Any Bot
+This repo is ready to deploy on Koyeb using the included `koyeb.yaml` and Dockerfile.
 
-**English** | [简体中文](./README_zh.md)
+### 1. Create the Koyeb app
 
-> **Save Any Telegram File to Anywhere 📂. Support restrict saving content and beyond telegram.**
+- Push this repo to GitHub.
+- In Koyeb, create a new App and select GitHub repo.
+- Use `koyeb.yaml` as the deployment config.
 
-[![Release Date](https://img.shields.io/github/release-date/krau/saveany-bot?label=release)](https://github.com/krau/saveany-bot/releases)
-[![tag](https://img.shields.io/github/v/tag/krau/saveany-bot.svg)](https://github.com/krau/saveany-bot/releases)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/krau/saveany-bot/build-release.yml)](https://github.com/krau/saveany-bot/actions/workflows/build-release.yml)
-[![Stars](https://img.shields.io/github/stars/krau/saveany-bot?style=flat)](https://github.com/krau/saveany-bot/stargazers)
-[![Downloads](https://img.shields.io/github/downloads/krau/saveany-bot/total)](https://github.com/krau/saveany-bot/releases)
-[![Issues](https://img.shields.io/github/issues/krau/saveany-bot)](https://github.com/krau/saveany-bot/issues)
-[![Pull Requests](https://img.shields.io/github/issues-pr/krau/saveany-bot?label=pr)](https://github.com/krau/saveany-bot/pulls)
-[![License](https://img.shields.io/github/license/krau/saveany-bot)](./LICENSE)
+### 2. Required environment variables
 
-</div>
-
-## 🎯 Features
-
-- Support documents / videos / photos / stickers… and even [Telegraph](https://telegra.ph/)
-- Bypass "restrict saving content" media
-- Batch download
-- Streaming transfer
-- Multi-user support
-- Auto organize files based on storage rules
-- Watch specified chats and auto-save messages, with filters
-- Transfer files between different storage backends
-- Integrate with yt-dlp to download and save media from 1000+ websites
-- Aria2 integration to download files from URLs/magnets and save to storages
-- Write JS parser plugins to save files from almost any website
-- Storage backends:
-  - Alist
-  - S3
-  - WebDAV
-  - Local filesystem
-  - Rclone (via command line)
-  - Telegram (re-upload to specified chats)
-
-## 📦 Quick Start
-
-Create a `config.toml` file with the following content:
-
-```toml
-lang = "en" # Language setting, "en" for English
-[telegram]
-token = "" # Your bot token, obtained from @BotFather
-[telegram.proxy]
-# Enable proxy for Telegram
-enable = false
-url = "socks5://127.0.0.1:7890"
-
-[[storages]]
-name = "Local Disk"
-type = "local"
-enable = true
-base_path = "./downloads"
-
-[[users]]
-id = 114514 # Your Telegram account id
-storages = []
-blacklist = true
-```
-
-Run Save Any Bot with Docker:
+Set these in the Koyeb dashboard before deploying:
 
 ```bash
-docker run -d --name saveany-bot \
-    -v ./config.toml:/app/config.toml \
-    -v ./downloads:/app/downloads \
-    ghcr.io/krau/saveany-bot:latest
+SAVEANY_TELEGRAM_TOKEN=your_bot_token_here
+SAVEANY_TELEGRAM_APP_ID=your_app_id
+SAVEANY_TELEGRAM_APP_HASH=your_app_hash
+SAVEANY_API_TOKEN=change-me
 ```
 
-Please [**read the docs**](https://sabot.unv.app/en/) for more configuration options and usage.
+Important:
+- `SAVEANY_TELEGRAM_TOKEN` is required for the Telegram bot to start.
+- `SAVEANY_API_TOKEN` is used for the HTTP API if you enable it.
+- The default `config.toml` in this repo is a starter config for Koyeb.
 
-## Sponsors
+### 3. Koyeb runtime notes
 
-This project is supported by [YxVM](https://yxvm.com/) and [NodeSupport](https://github.com/NodeSeekDev/NodeSupport).
+- The app listens on port `8080` when API mode is enabled.
+- Data is stored under `/app/data` and `/app/downloads` inside the container.
+- For persistent storage, attach a Koyeb volume to those paths in the app settings.
 
-If this project is helpful to you, consider sponsoring me via:
+### 4. Deploy command
 
-- [Afdian](https://afdian.com/a/unvapp)
-
-## Thanks To
-
-- [gotd](https://github.com/gotd/td)
-- [TG-FileStreamBot](https://github.com/EverythingSuckz/TG-FileStreamBot)
-- [gotgproto](https://github.com/celestix/gotgproto)
-- [tdl](https://github.com/iyear/tdl)
-- All the dependencies, contributors, sponsors and users.
-
-## Contact
-
-- [![Group](https://img.shields.io/badge/ProjectSaveAny-Group-blue)](https://t.me/ProjectSaveAny)
-- [![Discussion](https://img.shields.io/badge/Github-Discussion-white)](https://github.com/krau/saveany-bot/discussions)
-- [![PersonalChannel](https://img.shields.io/badge/Krau-PersonalChannel-cyan)](https://t.me/acherkrau)
+```bash
+koyeb app deploy -f koyeb.yaml
+```

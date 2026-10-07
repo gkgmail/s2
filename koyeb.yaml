@@ -1,0 +1,28 @@
+name: saveany-bot
+services:
+  - name: saveany-bot
+    type: web
+    docker:
+      dockerfile: Dockerfile
+      context: .
+    instance_type: micro
+    ports:
+      - port: 8080
+        protocol: http
+    routes:
+      - path: /
+    env:
+      SAVEANY_API_ENABLE: "true"
+      SAVEANY_API_HOST: "0.0.0.0"
+      SAVEANY_API_PORT: "8080"
+      SAVEANY_API_TOKEN: "change-me"
+      SAVEANY_LANG: "en"
+      SAVEANY_LOG_LEVEL: "info"
+      SAVEANY_WORKERS: "3"
+      SAVEANY_THREADS: "4"
+      SAVEANY_RETRY: "3"
+      SAVEANY_TELEGRAM_TOKEN: ""
+      SAVEANY_TELEGRAM_APP_ID: "0"
+      SAVEANY_TELEGRAM_APP_HASH: ""
+      SAVEANY_DB_PATH: "data/saveany.db"
+      SAVEANY_DB_SESSION: "data/session.db"
