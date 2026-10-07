@@ -28,6 +28,6 @@ enable = true
 base_path = "/tmp/downloads"
 
 [[users]]
-id = 5825448865
+id = 5825448865,7368630055
 storages = []
 blacklist = true
