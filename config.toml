@@ -28,6 +28,6 @@ enable = true
 base_path = "/tmp/downloads"
 
 [[users]]
-id =  # Your Telegram account id
+id = 123456789
 storages = []
 blacklist = true
