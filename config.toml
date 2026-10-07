@@ -18,11 +18,11 @@ app_id = 0
 app_hash = ""
 
 [db]
-path = "data/saveany.db"
-session = "data/session.db"
+path = "/tmp/bot.db"
+session = "/tmp/session.db"
 
 [[storages]]
 name = "Koyeb Disk"
 type = "local"
 enable = true
-base_path = "/app/downloads"
+base_path = "/tmp/downloads"
