@@ -120,7 +120,7 @@ password = 'password'
 # 用户列表 / User list
 [[users]]
 # telegram user id
-id = 825448865
+id = 5825448865
 # 存储过滤列表, 元素为存储标识名. / Storage filter list, elements are storage identifier names.
 # 将该列表留空并开启黑名单过滤模式以允许使用所有存储，此处示例为黑名单模式，用户 114514 可使用所有存储
 # Leave empty with blacklist mode enabled to allow all storages; this example uses blacklist mode, user 114514 can use all storages
