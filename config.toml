@@ -21,26 +21,19 @@ app_hash = ""
 path = "/tmp/bot.db"
 session = "/tmp/session.db"
 
-# Telegram Storage block (jo files channel me send karega)
-[[storages]]
-name = "Telegram"
-type = "telegram"
+[storage]
+default = "telegram"
+
+[storage.telegram]
 enable = true
 chat_id = -1003746021917
 
-# Koyeb local disk (backup ke liye)
-[[storages]]
-name = "Koyeb Disk"
-type = "local"
-enable = true
-base_path = "/tmp/downloads"
-
 [[users]]
-id = 5825448865 
-storages = ["Telegram", "Koyeb Disk"]
-blacklist = true
+id = 5825448865
+storages = ["telegram"]
+blacklist = false
 
 [[users]]
 id = 7368630055
-storages = ["Telegram", "Koyeb Disk"]
-blacklist = true
+storages = ["telegram"]
+blacklist = false
