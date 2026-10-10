@@ -21,8 +21,19 @@ app_hash = ""
 path = "/tmp/bot.db"
 session = "/tmp/session.db"
 
-[[storages]]
-name = "telegram"
-type = "telegram"
+[storage]
+default = "telegram"
+
+[storage.telegram]
 enable = true
 chat_id = -1003746021917
+
+[[users]]
+id = 5825448865
+storages = ["telegram"]
+whitelist = true
+
+[[users]]
+id = 7368630055
+storages = ["telegram"]
+whitelist = true
