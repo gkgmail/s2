@@ -16,6 +16,7 @@ token = "change-me"
 token = ""
 app_id = 0
 app_hash = ""
+userbot_enable = true
 
 [db]
 path = "/tmp/bot.db"
